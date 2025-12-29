@@ -348,7 +348,25 @@ def run_server():
 # Start HTTP server in a separate thread so your bot can still run
 threading.Thread(target=run_server, daemon=True).start()
 
+# shit idk web bdsfgsfdb
+
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b'Bot is alive!')
+
+def run_server():
+    server = HTTPServer(('', 8080), Handler)  # Replit uses port 8080
+    server.serve_forever()
+
+threading.Thread(target=run_server, daemon=True).start()
+
 
 # ---------------- RUN ----------------
+
 
 bot.run(TOKEN)
